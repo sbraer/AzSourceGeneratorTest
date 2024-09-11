@@ -1,0 +1,5 @@
+Title,varchar
+Author,varchar
+Pages,int
+Description,varchar
+Price,decimal

@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+
+		<FieldSourceGeneratorNamespace>Models.Generated</FieldSourceGeneratorNamespace>
+		<FieldSourceGeneratorExtensionFilePattern>.csv</FieldSourceGeneratorExtensionFilePattern>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+		<EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+		<CompilerGeneratedFilesOutputPath>$(BaseIntermediateOutputPath)Generated</CompilerGeneratedFilesOutputPath>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Remove="Book.csv" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<AdditionalFiles Include="Book.csv" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\AzSourceGenerator\AzSourceGeneratorTest.csproj" ReferenceOutputAssembly="false" OutputItemType="Analyzer" />
+		<PackageReference Include="Microsoft.Net.Compilers.Toolset" Version="4.11.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+	
+	<ItemGroup>
+		<CompilerVisibleProperty Include="FieldSourceGeneratorNamespace" />
+		<CompilerVisibleProperty Include="FieldSourceGeneratorExtensionFilePattern" />
+	</ItemGroup>
+
+</Project>

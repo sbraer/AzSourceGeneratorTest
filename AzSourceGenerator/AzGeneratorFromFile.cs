@@ -21,11 +21,9 @@ internal sealed class AzGeneratorFromFile : IIncrementalGenerator
                     return new Config(ns ?? "Models", pattern ?? ".csv");
                 });
 
-        // Combine the additional files with the configuration
         IncrementalValuesProvider<(AdditionalText, Config)> combinedProvider =
             context.AdditionalTextsProvider.Combine(configProvider);
 
-        // Register the source output
         context.RegisterSourceOutput(combinedProvider, (spc, source) =>
             Execute(spc, source.Item1, source.Item2));
     }
@@ -33,14 +31,10 @@ internal sealed class AzGeneratorFromFile : IIncrementalGenerator
     private static CsvFile? GetColumns(AdditionalText additionalText)
     {
         SourceText? text = additionalText.GetText();
-        if (text is null)
-        {
-            return null;
-        }
+        if (text is null) return null;
 
         var className = Path.GetFileNameWithoutExtension(additionalText.Path);
-        using StringReader reader = new(text.ToString());
-        var rows = reader.ReadToEnd().Split('\n');
+        var rows = text.ToString().Split('\n');
         if (rows.Length == 0) return null;
 
         return new CsvFile

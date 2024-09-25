@@ -35,5 +35,9 @@
 		<CompilerVisibleProperty Include="FieldSourceGeneratorNamespace" />
 		<CompilerVisibleProperty Include="FieldSourceGeneratorExtensionFilePattern" />
 	</ItemGroup>
+	
+	<ItemGroup>
+	  <Folder Include="Properties\" />
+	</ItemGroup>
 
 </Project>

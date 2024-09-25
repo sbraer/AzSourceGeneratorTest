@@ -1,6 +1,7 @@
 ﻿using Models;
 using Models.Generated;
 using System.Diagnostics;
+using AzGeneratorPartial;
 
 MyObject obj = new();
 Helper.SetPropertyMyObject(obj, "Id", "12");
@@ -60,3 +61,22 @@ Console.WriteLine(new string('=', 100));
 Console.WriteLine("Test class generation from csv file");
 var book = new Book { Author = "aa", Title = "bb", Description = "This is the description", Pages = 356, Price = 35.99 };
 Console.WriteLine(book);
+
+Console.WriteLine(new string('=', 100));
+
+var objx1 = PartialExample.get<MySuperClass>();
+var objx2 = PartialExample.get<SecondTestClass>();
+
+Console.WriteLine();
+
+public class MySuperClass
+{
+    public int Id { get; set; }
+    public string Name { get; set; } = default!;
+}
+
+public class SecondTestClass
+{
+    public int Identifier { get; set; }
+    public string Description { get; set; } = default!;
+}

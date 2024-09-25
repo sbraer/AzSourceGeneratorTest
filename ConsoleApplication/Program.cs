@@ -65,7 +65,7 @@ Console.WriteLine(book);
 Console.WriteLine(new string('=', 100));
 
 var objx1 = PartialExample.get<MySuperClass>();
-var objx2 = PartialExample.get<SecondTestClass>();
+//var objx2 = PartialExample.get<SecondTestClass>();
 
 Console.WriteLine();
 

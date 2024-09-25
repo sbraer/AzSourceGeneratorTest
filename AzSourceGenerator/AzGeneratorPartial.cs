@@ -1,15 +1,7 @@
-using Microsoft.CodeAnalysis.Text;
 using Microsoft.CodeAnalysis;
-using System.CodeDom.Compiler;
-using System.Globalization;
-using System.IO;
-using System;
-using System.Collections.Generic;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using System.Diagnostics;
 using System.Text;
 using System.Linq;
-using System.Xml.Linq;
 
 namespace AzSourceGeneratorTest;
 
@@ -116,14 +108,25 @@ internal sealed class AzGeneratorPartial : IIncrementalGenerator
                     {
                         //Console.WriteLine($"Property: {property.Name}, Type: {property.Type}");
                     }
-                    sb.Append($$"""
-                        if (typeof(T) == typeof({{namespacex}}{{className}}))
-                        {
-                            o = new {{namespacex}}{{className}}() as T;
-                            return;
-                        }
+
+                    if (listMethod.Count == 1)
+                    {
+                        sb.Append($$"""
+                                    o = new {{namespacex}}{{className}}() as T;
 
                         """);
+                    }
+                    else
+                    {
+                        sb.Append($$"""
+                                    if (typeof(T) == typeof({{namespacex}}{{className}}))
+                                    {
+                                        o = new {{namespacex}}{{className}}() as T;
+                                        return;
+                                    }
+
+                        """);
+                    }
                 }
             }
 
